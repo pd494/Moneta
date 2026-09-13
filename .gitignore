@@ -1,0 +1,27 @@
+# Local agent and editor state
+.agents/
+.codex/
+.claude/
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+.zed/
+.sourcekit-lsp/
+buildServer.json
+.DS_Store
+.env
+*.local
+
+# Dependencies and generated artifacts
+node_modules/
+.build/
+DerivedData/
+build/
+*.xcresult/
+*.xcuserstate
+xcuserdata/
+.swiftlint_cache
+coverage/
+*.log
+*.ipa
+*.dSYM.zip
