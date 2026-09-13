@@ -1,0 +1,15 @@
+included:
+  - Moneta
+  - MonetaTests
+  - MonetaUITests
+
+excluded:
+  - DerivedData
+
+strict: true
+
+opt_in_rules:
+  - private_swiftui_state
+  - unhandled_throwing_task
+  - blanket_disable_command
+  - accessibility_trait_for_button

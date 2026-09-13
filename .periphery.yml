@@ -1,0 +1,8 @@
+project: Moneta.xcodeproj
+schemes:
+  - Moneta
+# Hot reload reads these properties for invalidation, not their values.
+retain_assign_only_properties: true
+report_exclude:
+  - MonetaTests/**
+  - MonetaUITests/**
