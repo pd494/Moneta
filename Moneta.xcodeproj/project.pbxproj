@@ -10,12 +10,26 @@
 /* Begin PBXBuildFile section */
 		A10000000000000000000001 /* MonetaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* MonetaApp.swift */; };
 		A10000000000000000000002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* RootView.swift */; };
+		F10000000000000000000001 = {isa = PBXBuildFile; fileRef = F20000000000000000000001; };
+		F10000000000000000000002 = {isa = PBXBuildFile; fileRef = F20000000000000000000002; };
+		F10000000000000000000003 = {isa = PBXBuildFile; fileRef = F20000000000000000000003; };
+		F10000000000000000000004 = {isa = PBXBuildFile; fileRef = F20000000000000000000004; };
+		F10000000000000000000005 = {isa = PBXBuildFile; fileRef = F20000000000000000000005; };
+		F10000000000000000000006 = {isa = PBXBuildFile; fileRef = F20000000000000000000006; };
+		F10000000000000000000007 = {isa = PBXBuildFile; fileRef = F20000000000000000000007; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A20000000000000000000001 /* MonetaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonetaApp.swift; sourceTree = "<group>"; };
 		A20000000000000000000002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		A20000000000000000000003 /* Moneta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F20000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		F20000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
+		F20000000000000000000003 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surface.swift; sourceTree = "<group>"; };
+		F20000000000000000000004 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceView.swift; sourceTree = "<group>"; };
+		F20000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonetaTheme.swift; sourceTree = "<group>"; };
+		F20000000000000000000006 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPanel.swift; sourceTree = "<group>"; };
+		F20000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotReloading.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +56,13 @@
 			children = (
 				A20000000000000000000001 /* MonetaApp.swift */,
 				A20000000000000000000002 /* RootView.swift */,
+				F20000000000000000000007,
+				F20000000000000000000006,
+				F20000000000000000000005,
+				F20000000000000000000004,
+				F20000000000000000000003,
+				F20000000000000000000002,
+				F20000000000000000000001,
 			);
 			path = Moneta;
 			sourceTree = "<group>";
@@ -127,6 +148,13 @@
 			files = (
 				A10000000000000000000001 /* MonetaApp.swift in Sources */,
 				A10000000000000000000002 /* RootView.swift in Sources */,
+				F10000000000000000000007,
+				F10000000000000000000006,
+				F10000000000000000000005,
+				F10000000000000000000004,
+				F10000000000000000000003,
+				F10000000000000000000002,
+				F10000000000000000000001,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
