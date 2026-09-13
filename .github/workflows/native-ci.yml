@@ -1,0 +1,75 @@
+name: Native iOS
+
+on:
+  pull_request:
+  push:
+    branches: [main, swift-quality-ci, 'native-*', prototype-workspace]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native:
+    name: Build, format, tests, and unused code
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+      CI: 'true'
+      MONETA_DISABLE_HOT_RELOAD: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Detect native project
+        id: project
+        run: |
+          if [[ -f Moneta.xcodeproj/project.pbxproj ]]; then
+            echo 'present=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'present=false' >> "$GITHUB_OUTPUT"
+            echo 'Native checks activate when the native implementation PR lands.'
+          fi
+      - name: Check Swift formatting
+        if: steps.project.outputs.present == 'true'
+        run: |
+          xcrun swift-format lint --strict --recursive Moneta
+          for directory in MonetaTests MonetaUITests; do
+            if [[ -d "$directory" ]]; then xcrun swift-format lint --strict --recursive "$directory"; fi
+          done
+      - name: Compile Release for Simulator
+        if: steps.project.outputs.present == 'true'
+        run: >-
+          xcodebuild -project Moneta.xcodeproj -scheme Moneta
+          -configuration Release -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO build
+      - name: Detect test targets
+        if: steps.project.outputs.present == 'true'
+        id: tests
+        run: |
+          present=$(xmllint --xpath 'boolean(/Scheme/TestAction/Testables/TestableReference[not(@skipped="YES")]/BuildableReference | /Scheme/TestAction/TestPlans/TestPlanReference)' Moneta.xcodeproj/xcshareddata/xcschemes/Moneta.xcscheme)
+          echo "present=$present" >> "$GITHUB_OUTPUT"
+      - name: Run unit, snapshot, and launch/interaction tests
+        if: steps.project.outputs.present == 'true' && steps.tests.outputs.present == 'true'
+        run: >-
+          xcodebuild -project Moneta.xcodeproj -scheme Moneta
+          -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5'
+          -derivedDataPath DerivedData -resultBundlePath test-results/Moneta.xcresult
+          -parallel-testing-enabled NO test
+      - name: Check unused Swift code
+        if: steps.project.outputs.present == 'true'
+        run: bash tools/periphery.sh
+      - name: Upload test results and snapshot diffs
+        if: always() && steps.project.outputs.present == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-test-results
+          path: |
+            test-results/
+            MonetaTests/__Snapshots__/
+          if-no-files-found: ignore

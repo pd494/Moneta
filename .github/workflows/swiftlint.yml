@@ -1,0 +1,31 @@
+name: SwiftLint
+
+on:
+  pull_request:
+  push:
+    branches: [main, swift-quality-ci, 'native-*', prototype-workspace]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: swiftlint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  swiftlint:
+    name: SwiftLint
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Lint Swift sources
+        run: |
+          if [[ -d Moneta ]]; then
+            bash tools/lint-swift.sh --reporter github-actions-logging
+          else
+            echo "Native Swift sources are not present yet; SwiftLint will activate with the native app PR."
+          fi
