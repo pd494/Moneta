@@ -29,6 +29,8 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+<TestableReference skipped="NO"><BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="D00000000000000000000001" BuildableName="MonetaTests.xctest" BlueprintName="MonetaTests" ReferencedContainer="container:Moneta.xcodeproj"/></TestableReference>
+<TestableReference skipped="NO"><BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="E00000000000000000000001" BuildableName="MonetaUITests.xctest" BlueprintName="MonetaUITests" ReferencedContainer="container:Moneta.xcodeproj"/></TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
